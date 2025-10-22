@@ -22,22 +22,13 @@ class Plotter:
         y[0] = pos[1]
         for i in range(1, self.n):
             v = list(bin(random.randint(1, 32))[2:])
-            v = [0] * (5-len(v)) + v
-            it = zip(v, [x,y,r,g,b])
+            it = zip([0] * (5-len(v)) + v, [x,y,r,g,b])
             for com, val in it:
                 val[i] = val[i-1] + 1 if com == '1' else val[i-1] - 1
-        x = x % self.bounds
-        y = y % self.bounds
-        r = r % 256
-        g = g % 256
-        b = b % 256
-        r = r / 255.0
-        g = g / 255.0
-        b = b / 255.0
-        c = list(zip(r,g,b))
+        c = list(zip((r % 256) / 255.0,(g % 256) / 255.0,(b % 256) / 255.0))
         if self.is_bw:
             c = list(map(lambda x: 'k' if sum(x) < 2 else 'w',c))
-        return x,y,c
+        return x % self.bounds,y % self.bounds,c
     def get_pos(self):
         poses = np.linspace(0,self.bounds//2,self.rounds)
         pss = set()
@@ -60,5 +51,4 @@ class Plotter:
 #plotter.plot()
 plotter = Plotter(rounds=8,n=100000,bounds=1000,is_bw=True)
 plotter.plot()
-
 
