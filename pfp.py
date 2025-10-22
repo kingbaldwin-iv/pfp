@@ -34,10 +34,11 @@ class Plotter:
                     val[i] = val[i-1] + 1
                 else:
                     val[i] = val[i-1] - 1
-                if index < 2:
-                    val[i] = val[i] % self.bounds
-                else:
-                    val[i] = val[i] % 256
+        x = x % self.bounds
+        y = y % self.bounds
+        r = r % 256
+        g = g % 256
+        b = b % 256
         r = r / 255.0
         g = g / 255.0
         b = b / 255.0
