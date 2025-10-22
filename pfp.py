@@ -25,11 +25,10 @@ class Plotter:
             x[0] = pos[0]
             y[0] = pos[1]
         for i in range(1, self.n):
-            direction = random.randint(1, 32)
-            v = list(bin(direction)[2:])
+            v = list(bin(random.randint(1, 32))[2:])
             v = [0] * (5-len(v)) + v
             it = zip(v, [x,y,r,g,b])
-            for index,(com, val) in enumerate(it):
+            for com, val in (it):
                 if com == '1':
                     val[i] = val[i-1] + 1
                 else:
@@ -42,11 +41,9 @@ class Plotter:
         r = r / 255.0
         g = g / 255.0
         b = b / 255.0
-        c = zip(r,g,b)
+        c = list(zip(r,g,b))
         if self.is_bw:
             c = list(map(lambda x: 'k' if sum(x) < 2 else 'w',c))
-        else:
-            c = list(c)
         return x,y,c
     def get_pos(self):
         poses = np.linspace(0,self.bounds//2,self.rounds)
