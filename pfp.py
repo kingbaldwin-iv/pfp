@@ -42,7 +42,7 @@ class Plotter:
         poses = np.linspace(0,self.bounds//2,self.rounds)
         pss = set()
         for i in poses:
-            pos = pos.union({(i,i),(i,self.bounds-i),(self.bounds-i,i),(self.bounds-i,self.bounds-i)})
+            pss = pss.union({(i,i),(i,self.bounds-i),(self.bounds-i,i),(self.bounds-i,self.bounds-i)})
         return pss
     def plot(self):
         poses = self.get_pos()
